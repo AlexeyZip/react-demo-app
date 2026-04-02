@@ -63,6 +63,15 @@ const createOrderSchema = z.object({
   totalPrice: z.number().positive(),
 });
 
+const productSchema = z.object({
+  title: z.string().min(2),
+  description: z.string().min(5),
+  price: z.number().positive(),
+  imageUrl: z.string().url(),
+  category: z.string().min(2),
+  inStock: z.boolean(),
+});
+
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
@@ -163,6 +172,57 @@ app.post("/orders", (req, res) => {
 
 app.get("/orders", (_req, res) => {
   return res.json(orders);
+});
+
+app.post("/admin/products", (req, res) => {
+  const result = productSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({
+      message: "Invalid product payload",
+      issues: result.error.issues,
+    });
+  }
+
+  const newProduct = {
+    id: `p_${Date.now()}`,
+    ...result.data,
+  };
+
+  products.unshift(newProduct);
+
+  return res.status(201).json(newProduct);
+});
+
+app.patch("/admin/products/:id", (req, res) => {
+  const result = productSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({
+      message: "Invalid product payload",
+      issues: result.error.issues,
+    });
+  }
+
+  const index = products.findIndex((p) => p.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  products[index] = {
+    ...products[index],
+    ...result.data,
+  };
+
+  return res.json(products[index]);
+});
+
+app.delete("/admin/products/:id", (req, res) => {
+  const index = products.findIndex((p) => p.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  const [deleted] = products.splice(index, 1);
+  return res.json(deleted);
 });
 
 app.listen(port, () => {
