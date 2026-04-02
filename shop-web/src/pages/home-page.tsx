@@ -5,10 +5,13 @@ import { useProductFilters } from "@/features/products/model/use-product-filters
 import { useProductsQuery } from "@/features/products/model/use-products-query";
 import { useDebouncedValue } from "@/shared/lib/use-debounced-value";
 import { EmptyState } from "@/shared/ui/empty-state";
+import { useAppDispatch } from "@/app/store/hooks";
+import { addItem } from "@/features/cart/model/cart-slice";
 
 export function HomePage() {
   const { filters, setFilters, resetFilters } = useProductFilters();
   const debouncedQ = useDebouncedValue(filters.q, 400);
+  const dispatch = useAppDispatch();
 
   const { data, isPending, isError, error, isFetching } = useProductsQuery({
     ...filters,
@@ -62,7 +65,11 @@ export function HomePage() {
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {data.items.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={(nextProduct) => dispatch(addItem(nextProduct))}
+              />
             ))}
           </div>
 

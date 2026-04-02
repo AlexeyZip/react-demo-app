@@ -5,6 +5,7 @@ import { LoginPage } from "@/pages/login-page";
 import { AdminPage } from "@/pages/admin-page";
 import { NotFoundPage } from "@/pages/not-found-page";
 import { ProtectedRoute } from "./protected-route";
+import { CartPage } from "@/pages/cart-page";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
+      { path: "cart", element: <CartPage /> },
       {
         element: <ProtectedRoute allowedRoles={["admin"]} />,
         children: [{ path: "admin", element: <AdminPage /> }],

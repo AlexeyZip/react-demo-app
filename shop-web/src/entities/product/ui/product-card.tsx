@@ -2,9 +2,10 @@ import type { Product } from "@/entities/product/model/types";
 
 interface ProductCardProps {
   product: Product;
+  onAddToCart: (product: Product) => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
     <article className="rounded-lg border bg-white p-4 shadow-sm">
       <img
@@ -25,6 +26,15 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.inStock ? "In stock" : "Out of stock"}
           </span>
         </div>
+
+        <button
+          type="button"
+          className="mt-2 w-full rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
+          disabled={!product.inStock}
+          onClick={() => onAddToCart(product)}
+        >
+          Add to cart
+        </button>
       </div>
     </article>
   );
