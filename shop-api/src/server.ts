@@ -3,6 +3,25 @@ import express from "express";
 import { z } from "zod";
 import { products, users } from "./data.js";
 
+function requireAdmin(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) {
+  const authHeader = req.header("authorization");
+  const token = authHeader?.replace("Bearer ", "");
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  if (token !== "mock-token-u2") {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+
+  next();
+}
+
 const app = express();
 const port = 4000;
 
@@ -174,7 +193,7 @@ app.get("/orders", (_req, res) => {
   return res.json(orders);
 });
 
-app.post("/admin/products", (req, res) => {
+app.post("/admin/products", requireAdmin, (req, res) => {
   const result = productSchema.safeParse(req.body);
   if (!result.success) {
     return res.status(400).json({
@@ -193,7 +212,7 @@ app.post("/admin/products", (req, res) => {
   return res.status(201).json(newProduct);
 });
 
-app.patch("/admin/products/:id", (req, res) => {
+app.patch("/admin/products/:id", requireAdmin, (req, res) => {
   const result = productSchema.safeParse(req.body);
   if (!result.success) {
     return res.status(400).json({
@@ -215,7 +234,7 @@ app.patch("/admin/products/:id", (req, res) => {
   return res.json(products[index]);
 });
 
-app.delete("/admin/products/:id", (req, res) => {
+app.delete("/admin/products/:id", requireAdmin, (req, res) => {
   const index = products.findIndex((p) => p.id === req.params.id);
   if (index === -1) {
     return res.status(404).json({ message: "Product not found" });

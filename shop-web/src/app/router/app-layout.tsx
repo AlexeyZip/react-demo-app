@@ -19,7 +19,7 @@ export function AppLayout() {
         <nav className="mx-auto flex max-w-5xl items-center gap-4 p-4">
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
-          <Link to="/admin">Admin</Link>
+          {user?.role === "admin" ? <Link to="/admin">Admin</Link> : null}
           <Link to="/cart" className="relative">
             Cart
             {cartItemsCount > 0 ? (
