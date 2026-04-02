@@ -1,0 +1,93 @@
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useAppDispatch } from "@/app/store/hooks";
+import { login } from "@/features/auth/model/auth-slice";
+import { loginRequest } from "@/features/auth/api/login";
+import {
+  loginSchema,
+  type LoginFormValues,
+} from "@/features/auth/model/login-schema";
+
+export function LoginPage() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const loginMutation = useMutation({
+    mutationFn: loginRequest,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onBlur",
+  });
+
+  const onSubmit = async (values: LoginFormValues) => {
+    const response = await loginMutation.mutateAsync(values);
+    dispatch(login(response));
+    navigate(response.user.role === "admin" ? "/admin" : "/");
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-md space-y-4 rounded bg-white p-6 shadow"
+      noValidate
+    >
+      <h1 className="text-2xl font-bold">Login</h1>
+
+      <div>
+        <label className="mb-1 block text-sm font-medium">Email</label>
+        <input
+          className="w-full rounded border px-3 py-2"
+          type="email"
+          placeholder="you@example.com"
+          {...register("email")}
+        />
+        {errors.email ? (
+          <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+        ) : null}
+      </div>
+
+      <div>
+        <label className="mb-1 block text-sm font-medium">Password</label>
+        <input
+          className="w-full rounded border px-3 py-2"
+          type="password"
+          placeholder="******"
+          {...register("password")}
+        />
+        {errors.password ? (
+          <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+        ) : null}
+      </div>
+
+      {loginMutation.isError ? (
+        <p className="rounded border border-red-200 bg-red-50 p-2 text-sm text-red-700">
+          {loginMutation.error.message}
+        </p>
+      ) : null}
+
+      <div className="rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-600">
+        <p>Demo user: user@shop.com / user123</p>
+        <p>Demo admin: admin@shop.com / admin123</p>
+      </div>
+
+      <button
+        className="rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-60"
+        type="submit"
+        disabled={loginMutation.isPending}
+      >
+        {loginMutation.isPending ? "Signing in..." : "Sign in"}
+      </button>
+    </form>
+  );
+}
