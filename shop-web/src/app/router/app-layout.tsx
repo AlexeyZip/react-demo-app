@@ -28,6 +28,7 @@ export function AppLayout() {
               </span>
             ) : null}
           </Link>
+          <Link to="/orders">Orders</Link>
 
           <div className="ml-auto flex items-center gap-3">
             {isAuthenticated && user ? (

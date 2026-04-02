@@ -14,6 +14,7 @@ import {
 } from "@/features/checkout/model/checkout-schema";
 import { createOrder } from "@/features/checkout/api/create-order";
 import { EmptyState } from "@/shared/ui/empty-state";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function CheckoutPage() {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ export function CheckoutPage() {
 
   const items = useAppSelector(selectCartItems);
   const totalPrice = useAppSelector(selectCartTotalPrice);
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -50,6 +52,7 @@ export function CheckoutPage() {
     });
 
     dispatch(clearCart());
+    queryClient.invalidateQueries({ queryKey: ["orders"] });
     navigate(`/order-success?orderId=${response.id}`);
   };
 

@@ -6,6 +6,30 @@ import { products, users } from "./data.js";
 const app = express();
 const port = 4000;
 
+type OrderStatus = "pending" | "paid" | "shipped";
+
+interface OrderRecord {
+  id: string;
+  createdAt: string;
+  status: OrderStatus;
+  customer: {
+    fullName: string;
+    email: string;
+    address: string;
+    city: string;
+    postalCode: string;
+  };
+  items: Array<{
+    productId: string;
+    title: string;
+    price: number;
+    quantity: number;
+  }>;
+  totalPrice: number;
+}
+
+const orders: OrderRecord[] = [];
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -127,11 +151,18 @@ app.post("/orders", (req, res) => {
     });
   }
   const orderId = `ord_${Date.now()}`;
-  return res.status(201).json({
+  const newOrder: OrderRecord = {
     id: orderId,
     createdAt: new Date().toISOString(),
+    status: "pending",
     ...result.data,
-  });
+  };
+  orders.unshift(newOrder);
+  return res.status(201).json(newOrder);
+});
+
+app.get("/orders", (_req, res) => {
+  return res.json(orders);
 });
 
 app.listen(port, () => {
