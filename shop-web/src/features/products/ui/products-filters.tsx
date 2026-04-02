@@ -13,7 +13,7 @@ export function ProductsFilters({
 }: ProductsFiltersProps) {
   return (
     <section className="rounded-lg border bg-white p-4 shadow-sm">
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-4">
         <input
           className="rounded border px-3 py-2"
           placeholder="Search by title or description..."
@@ -29,6 +29,16 @@ export function ProductsFilters({
           <option value="">All categories</option>
           <option value="Accessories">Accessories</option>
           <option value="Displays">Displays</option>
+        </select>
+
+        <select
+          className="rounded border px-3 py-2"
+          value={filters.limit}
+          onChange={(e) => onChange({ limit: Number(e.target.value), page: 1 })}
+        >
+          <option value={6}>6 per page</option>
+          <option value={12}>12 per page</option>
+          <option value={24}>24 per page</option>
         </select>
 
         <button

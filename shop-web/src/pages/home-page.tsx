@@ -1,9 +1,10 @@
-import { ProductCard } from "@/entities/product";
+import { ProductCard, ProductCardSkeleton } from "@/entities/product";
 import { ProductsFilters } from "@/features/products/ui/products-filters";
 import { ProductsPagination } from "@/features/products/ui/products-pagination";
 import { useProductFilters } from "@/features/products/model/use-product-filters";
 import { useProductsQuery } from "@/features/products/model/use-products-query";
 import { useDebouncedValue } from "@/shared/lib/use-debounced-value";
+import { EmptyState } from "@/shared/ui/empty-state";
 
 export function HomePage() {
   const { filters, setFilters, resetFilters } = useProductFilters();
@@ -36,16 +37,25 @@ export function HomePage() {
         <p className="text-sm text-slate-500">Updating...</p>
       ) : null}
 
-      {isPending ? <p className="text-slate-600">Loading products...</p> : null}
-
       {isError ? (
         <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
           Failed to load products: {error.message}
         </p>
       ) : null}
 
+      {isPending ? (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: filters.limit }).map((_, idx) => (
+            <ProductCardSkeleton key={idx} />
+          ))}
+        </div>
+      ) : null}
+
       {!isPending && !isError && (!data || data.items.length === 0) ? (
-        <p className="text-slate-600">No products found.</p>
+        <EmptyState
+          title="No products found"
+          description="Try changing your search, category, or reset the filters."
+        />
       ) : null}
 
       {!isPending && !isError && data?.items.length ? (
