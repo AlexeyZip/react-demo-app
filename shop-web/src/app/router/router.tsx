@@ -6,6 +6,8 @@ import { AdminPage } from "@/pages/admin-page";
 import { NotFoundPage } from "@/pages/not-found-page";
 import { ProtectedRoute } from "./protected-route";
 import { CartPage } from "@/pages/cart-page";
+import { CheckoutPage } from "@/pages/checkout-page";
+import { OrderSuccessPage } from "@/pages/order-success-page";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +18,8 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
       { path: "cart", element: <CartPage /> },
+      { path: "checkout", element: <CheckoutPage /> },
+      { path: "order-success", element: <OrderSuccessPage /> },
       {
         element: <ProtectedRoute allowedRoles={["admin"]} />,
         children: [{ path: "admin", element: <AdminPage /> }],

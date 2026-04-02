@@ -18,6 +18,27 @@ const loginSchema = z.object({
   password: z.string().min(6),
 });
 
+const createOrderSchema = z.object({
+  customer: z.object({
+    fullName: z.string().min(2),
+    email: z.email(),
+    address: z.string().min(5),
+    city: z.string().min(2),
+    postalCode: z.string().min(3),
+  }),
+  items: z
+    .array(
+      z.object({
+        productId: z.string(),
+        title: z.string(),
+        price: z.number().positive(),
+        quantity: z.number().int().positive(),
+      }),
+    )
+    .min(1),
+  totalPrice: z.number().positive(),
+});
+
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
@@ -94,6 +115,22 @@ app.get("/products", (req, res) => {
     page: safePage,
     limit,
     totalPages,
+  });
+});
+
+app.post("/orders", (req, res) => {
+  const result = createOrderSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({
+      message: "Invalid order payload",
+      issues: result.error.issues,
+    });
+  }
+  const orderId = `ord_${Date.now()}`;
+  return res.status(201).json({
+    id: orderId,
+    createdAt: new Date().toISOString(),
+    ...result.data,
   });
 });
 
