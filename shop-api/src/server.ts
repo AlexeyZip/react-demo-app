@@ -91,6 +91,10 @@ const productSchema = z.object({
   inStock: z.boolean(),
 });
 
+const updateOrderStatusSchema = z.object({
+  status: z.enum(["pending", "paid", "shipped"]),
+});
+
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
@@ -191,6 +195,24 @@ app.post("/orders", (req, res) => {
 
 app.get("/orders", (_req, res) => {
   return res.json(orders);
+});
+
+app.patch("/admin/orders/:id/status", requireAdmin, (req, res) => {
+  const result = updateOrderStatusSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({
+      message: "Invalid status payload",
+      issues: result.error.issues,
+    });
+  }
+
+  const order = orders.find((o) => o.id === req.params.id);
+  if (!order) {
+    return res.status(404).json({ message: "Order not found" });
+  }
+
+  order.status = result.data.status;
+  return res.json(order);
 });
 
 app.post("/admin/products", requireAdmin, (req, res) => {

@@ -102,17 +102,15 @@ export function CartPage() {
 
       <div className="rounded-lg border bg-white p-4">
         <p className="text-sm text-slate-600">Items: {itemsCount}</p>
-        <p className="mt-1 text-lg font-bold">
-          Total: ${totalPrice.toFixed(2)}
-          <div className="mt-3">
-            <Link
-              to="/checkout"
-              className="inline-block rounded bg-slate-900 px-4 py-2 text-white"
-            >
-              Proceed to checkout
-            </Link>
-          </div>
-        </p>
+        <p className="mt-1 text-lg font-bold">Total: ${totalPrice.toFixed(2)}</p>
+        <div className="mt-3">
+          <Link
+            to="/checkout"
+            className="inline-block rounded bg-slate-900 px-4 py-2 text-white"
+          >
+            Proceed to checkout
+          </Link>
+        </div>
       </div>
     </section>
   );

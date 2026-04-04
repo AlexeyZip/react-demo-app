@@ -29,6 +29,9 @@ export function AppLayout() {
             ) : null}
           </Link>
           <Link to="/orders">Orders</Link>
+          {user?.role === "admin" ? (
+            <Link to="/admin/orders">Admin Orders</Link>
+          ) : null}
 
           <div className="ml-auto flex items-center gap-3">
             {isAuthenticated && user ? (

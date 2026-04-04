@@ -9,6 +9,7 @@ import {
   loadCartState,
   saveCartState,
 } from "@/features/cart/model/cart-storage";
+import { setAccessToken } from "@/shared/api/auth-token";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,8 @@ export const store = configureStore({
 let currentAuthState = store.getState().auth;
 let currentCartState = store.getState().cart;
 
+setAccessToken(store.getState().auth.token);
+
 store.subscribe(() => {
   const nextAuthState = store.getState().auth;
   const nextCartState = store.getState().cart;
@@ -31,6 +34,7 @@ store.subscribe(() => {
   if (nextAuthState !== currentAuthState) {
     currentAuthState = nextAuthState;
     saveAuthState(nextAuthState);
+    setAccessToken(nextAuthState.token);
   }
 
   if (nextCartState !== currentCartState) {

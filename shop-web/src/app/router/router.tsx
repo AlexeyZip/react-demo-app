@@ -9,6 +9,7 @@ import { CartPage } from "@/pages/cart-page";
 import { CheckoutPage } from "@/pages/checkout-page";
 import { OrderSuccessPage } from "@/pages/order-success-page";
 import { OrdersPage } from "@/pages/orders-page";
+import { AdminOrdersPage } from "@/pages/admin-orders-page";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,10 @@ export const router = createBrowserRouter([
       { path: "orders", element: <OrdersPage /> },
       {
         element: <ProtectedRoute allowedRoles={["admin"]} />,
-        children: [{ path: "admin", element: <AdminPage /> }],
+        children: [
+          { path: "admin", element: <AdminPage /> },
+          { path: "admin/orders", element: <AdminOrdersPage /> },
+        ],
       },
     ],
   },
