@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import { store } from "@/app/store/store";
 import { router } from "@/app/router/router";
 import "./index.css";
+import "@/shared/i18n/config";
 
 const queryClient = new QueryClient({
   defaultOptions: {

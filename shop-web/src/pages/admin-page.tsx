@@ -15,6 +15,7 @@ import {
 } from "@/features/admin-products/model/product-form-schema";
 import type { Product } from "@/entities/product";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const defaultValues: ProductFormValues = {
   title: "",
@@ -26,6 +27,7 @@ const defaultValues: ProductFormValues = {
 };
 
 export function AdminPage() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
@@ -51,10 +53,10 @@ export function AdminPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       reset(defaultValues);
-      toast.success("Product created");
+      toast.success(t("adminProducts.createdToast"));
     },
     onError: () => {
-      toast.error("Failed to create product");
+      toast.error(t("adminProducts.createFailedToast"));
     },
   });
 
@@ -70,10 +72,10 @@ export function AdminPage() {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       setEditingProduct(null);
       reset(defaultValues);
-      toast.success("Product updated");
+      toast.success(t("adminProducts.updatedToast"));
     },
     onError: () => {
-      toast.error("Failed to update product");
+      toast.error(t("adminProducts.updateFailedToast"));
     },
   });
 
@@ -81,10 +83,10 @@ export function AdminPage() {
     mutationFn: deleteProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
-      toast.success("Product deleted");
+      toast.success(t("adminProducts.deletedToast"));
     },
     onError: () => {
-      toast.error("Failed to delete product");
+      toast.error(t("adminProducts.deleteFailedToast"));
     },
   });
 
@@ -116,7 +118,7 @@ export function AdminPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="text-2xl font-bold">Admin Products</h1>
+      <h1 className="text-2xl font-bold">{t("adminProducts.title")}</h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -124,7 +126,7 @@ export function AdminPage() {
       >
         <input
           className="rounded border px-3 py-2"
-          placeholder="Title"
+          placeholder={t("adminProducts.placeholderTitle")}
           {...register("title")}
         />
         {errors.title ? (
@@ -133,7 +135,7 @@ export function AdminPage() {
 
         <textarea
           className="rounded border px-3 py-2"
-          placeholder="Description"
+          placeholder={t("adminProducts.placeholderDescription")}
           {...register("description")}
         />
         {errors.description ? (
@@ -144,7 +146,7 @@ export function AdminPage() {
           className="rounded border px-3 py-2"
           type="number"
           step="0.01"
-          placeholder="Price"
+          placeholder={t("adminProducts.placeholderPrice")}
           {...register("price", { valueAsNumber: true })}
         />
         {errors.price ? (
@@ -153,7 +155,7 @@ export function AdminPage() {
 
         <input
           className="rounded border px-3 py-2"
-          placeholder="Image URL"
+          placeholder={t("adminProducts.placeholderImageUrl")}
           {...register("imageUrl")}
         />
         {errors.imageUrl ? (
@@ -162,7 +164,7 @@ export function AdminPage() {
 
         <input
           className="rounded border px-3 py-2"
-          placeholder="Category"
+          placeholder={t("adminProducts.placeholderCategory")}
           {...register("category")}
         />
         {errors.category ? (
@@ -171,7 +173,7 @@ export function AdminPage() {
 
         <label className="flex items-center gap-2">
           <input type="checkbox" {...register("inStock")} />
-          In stock
+          {t("adminProducts.inStock")}
         </label>
 
         <div className="flex gap-2">
@@ -180,7 +182,7 @@ export function AdminPage() {
             className="rounded bg-slate-900 px-4 py-2 text-white"
             disabled={createMutation.isPending || updateMutation.isPending}
           >
-            {editingProduct ? "Update product" : "Create product"}
+            {editingProduct ? t("adminProducts.update") : t("adminProducts.create")}
           </button>
 
           {editingProduct ? (
@@ -189,16 +191,16 @@ export function AdminPage() {
               className="rounded border px-4 py-2"
               onClick={cancelEditing}
             >
-              Cancel edit
+              {t("adminProducts.cancelEdit")}
             </button>
           ) : null}
         </div>
       </form>
 
-      {isPending ? <p>Loading products...</p> : null}
+      {isPending ? <p>{t("adminProducts.loading")}</p> : null}
       {isError ? (
         <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
-          Failed to load products: {error.message}
+          {t("adminProducts.loadError", { message: error.message })}
         </p>
       ) : null}
 
@@ -222,7 +224,7 @@ export function AdminPage() {
                   className="rounded border px-3 py-1.5"
                   onClick={() => startEditing(product)}
                 >
-                  Edit
+                  {t("adminProducts.edit")}
                 </button>
 
                 <button
@@ -231,7 +233,7 @@ export function AdminPage() {
                   onClick={() => deleteMutation.mutate(product.id)}
                   disabled={deleteMutation.isPending}
                 >
-                  Delete
+                  {t("adminProducts.delete")}
                 </button>
               </div>
             </article>

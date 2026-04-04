@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface ProductsPaginationProps {
   page: number;
   totalPages: number;
@@ -9,6 +11,8 @@ export function ProductsPagination({
   totalPages,
   onPageChange,
 }: ProductsPaginationProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex items-center justify-between rounded-lg border bg-white p-4">
       <button
@@ -17,11 +21,11 @@ export function ProductsPagination({
         onClick={() => onPageChange(page - 1)}
         disabled={page <= 1}
       >
-        Previous
+        {t("pagination.previous")}
       </button>
 
       <p className="text-sm text-slate-600">
-        Page {page} of {totalPages}
+        {t("pagination.pageOf", { page, totalPages })}
       </p>
 
       <button
@@ -30,7 +34,7 @@ export function ProductsPagination({
         onClick={() => onPageChange(page + 1)}
         disabled={page >= totalPages}
       >
-        Next
+        {t("pagination.next")}
       </button>
     </div>
   );

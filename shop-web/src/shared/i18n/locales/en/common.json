@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "home": "Home",
+    "login": "Login",
+    "admin": "Admin",
+    "cart": "Cart",
+    "orders": "Orders",
+    "adminOrders": "Admin Orders",
+    "logout": "Logout",
+    "guest": "Guest"
+  },
+  "catalog": {
+    "title": "Product Catalog",
+    "updating": "Updating...",
+    "loadError": "Failed to load products: {{message}}",
+    "emptyTitle": "No products found",
+    "emptyDescription": "Try changing your search, category, or reset the filters."
+  },
+  "filters": {
+    "searchPlaceholder": "Search by title or description...",
+    "allCategories": "All categories",
+    "categoryAccessories": "Accessories",
+    "categoryDisplays": "Displays",
+    "perPage": "{{count}} per page",
+    "reset": "Reset filters"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{page}} of {{totalPages}}"
+  },
+  "product": {
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to cart"
+  },
+  "cart": {
+    "title": "Cart",
+    "clear": "Clear cart",
+    "emptyTitle": "Your cart is empty",
+    "emptyDescription": "Add products from the catalog to see them here.",
+    "items": "Items: {{count}}",
+    "total": "Total: ${{value}}",
+    "proceedToCheckout": "Proceed to checkout",
+    "remove": "Remove"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "fullName": "Full name",
+    "email": "Email",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "placingOrder": "Placing order...",
+    "placeOrder": "Place order",
+    "emptyTitle": "Your cart is empty",
+    "emptyDescription": "Add products before proceeding to checkout.",
+    "orderPlaced": "Order placed successfully",
+    "placeOrderFailed": "Failed to place order"
+  },
+  "orders": {
+    "title": "Orders",
+    "loading": "Loading orders...",
+    "loadError": "Failed to load orders: {{message}}",
+    "emptyTitle": "No orders yet",
+    "emptyDescription": "Place your first order to see it here.",
+    "created": "Created: {{value}}",
+    "items": "Items: {{count}}",
+    "total": "Total: ${{value}}"
+  },
+  "adminProducts": {
+    "title": "Admin Products",
+    "placeholderTitle": "Title",
+    "placeholderDescription": "Description",
+    "placeholderPrice": "Price",
+    "placeholderImageUrl": "Image URL",
+    "placeholderCategory": "Category",
+    "inStock": "In stock",
+    "create": "Create product",
+    "update": "Update product",
+    "cancelEdit": "Cancel edit",
+    "loading": "Loading products...",
+    "loadError": "Failed to load products: {{message}}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "createdToast": "Product created",
+    "updatedToast": "Product updated",
+    "deletedToast": "Product deleted",
+    "createFailedToast": "Failed to create product",
+    "updateFailedToast": "Failed to update product",
+    "deleteFailedToast": "Failed to delete product"
+  },
+  "adminOrders": {
+    "title": "Admin Orders",
+    "loading": "Loading orders...",
+    "loadError": "Failed to load orders: {{message}}",
+    "emptyTitle": "No orders yet",
+    "emptyDescription": "Orders will appear here after users complete checkout.",
+    "created": "Created: {{value}}",
+    "customer": "Customer: {{name}} ({{email}})",
+    "total": "Total: ${{value}}",
+    "markAs": "Mark as {{status}}",
+    "statusUpdatedToast": "Order status updated"
+  },
+  "orderSuccess": {
+    "title": "Order placed successfully",
+    "description": "Your order has been created{{suffix}}.",
+    "backToCatalog": "Back to catalog",
+    "goToCart": "Go to cart"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
+    "demoUser": "Demo user: user@shop.com / user123",
+    "demoAdmin": "Demo admin: admin@shop.com / admin123"
+  },
+  "errorPage": {
+    "unexpectedTitle": "Unexpected error",
+    "unexpectedMessage": "Something went wrong. Please try again.",
+    "backHome": "Back to home"
+  },
+  "status": {
+    "pending": "pending",
+    "paid": "paid",
+    "shipped": "shipped"
+  }
+}

@@ -5,10 +5,12 @@ import { OrderStatusBadge } from "@/features/orders/ui/order-status-badge";
 import { EmptyState } from "@/shared/ui/empty-state";
 import type { OrderStatus } from "@/entities/order";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const statuses: OrderStatus[] = ["pending", "paid", "shipped"];
 
 export function AdminOrdersPage() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { data, isPending, isError, error } = useOrdersQuery();
 
@@ -22,18 +24,18 @@ export function AdminOrdersPage() {
     }) => updateOrderStatus(orderId, status),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
-      toast.success("Order status updated");
+      toast.success(t("adminOrders.statusUpdatedToast"));
     },
   });
 
   if (isPending) {
-    return <p className="text-slate-600">Loading orders...</p>;
+    return <p className="text-slate-600">{t("adminOrders.loading")}</p>;
   }
 
   if (isError) {
     return (
       <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
-        Failed to load orders: {error.message}
+        {t("adminOrders.loadError", { message: error.message })}
       </p>
     );
   }
@@ -41,15 +43,15 @@ export function AdminOrdersPage() {
   if (!data || data.length === 0) {
     return (
       <EmptyState
-        title="No orders yet"
-        description="Orders will appear here after users complete checkout."
+        title={t("adminOrders.emptyTitle")}
+        description={t("adminOrders.emptyDescription")}
       />
     );
   }
 
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold">Admin Orders</h1>
+      <h1 className="text-2xl font-bold">{t("adminOrders.title")}</h1>
 
       <div className="space-y-3">
         {data.map((order) => (
@@ -60,13 +62,18 @@ export function AdminOrdersPage() {
             </div>
 
             <p className="mt-2 text-sm text-slate-600">
-              Created: {new Date(order.createdAt).toLocaleString()}
+              {t("adminOrders.created", {
+                value: new Date(order.createdAt).toLocaleString(),
+              })}
             </p>
             <p className="text-sm text-slate-600">
-              Customer: {order.customer.fullName} ({order.customer.email})
+              {t("adminOrders.customer", {
+                name: order.customer.fullName,
+                email: order.customer.email,
+              })}
             </p>
             <p className="text-sm text-slate-600">
-              Total: ${order.totalPrice.toFixed(2)}
+              {t("adminOrders.total", { value: order.totalPrice.toFixed(2) })}
             </p>
 
             <div className="mt-3 flex flex-wrap gap-2">
@@ -84,7 +91,7 @@ export function AdminOrdersPage() {
                   }
                   disabled={updateStatusMutation.isPending}
                 >
-                  Mark as {status}
+                  {t("adminOrders.markAs", { status: t(`status.${status}`) })}
                 </button>
               ))}
             </div>

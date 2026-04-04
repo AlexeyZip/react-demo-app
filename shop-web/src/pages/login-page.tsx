@@ -9,8 +9,10 @@ import {
   loginSchema,
   type LoginFormValues,
 } from "@/features/auth/model/login-schema";
+import { useTranslation } from "react-i18next";
 
 export function LoginPage() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loginMutation = useMutation({
@@ -42,10 +44,10 @@ export function LoginPage() {
       className="max-w-md space-y-4 rounded bg-white p-6 shadow"
       noValidate
     >
-      <h1 className="text-2xl font-bold">Login</h1>
+      <h1 className="text-2xl font-bold">{t("login.title")}</h1>
 
       <div>
-        <label className="mb-1 block text-sm font-medium">Email</label>
+        <label className="mb-1 block text-sm font-medium">{t("login.email")}</label>
         <input
           className="w-full rounded border px-3 py-2"
           type="email"
@@ -58,7 +60,7 @@ export function LoginPage() {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium">Password</label>
+        <label className="mb-1 block text-sm font-medium">{t("login.password")}</label>
         <input
           className="w-full rounded border px-3 py-2"
           type="password"
@@ -77,8 +79,8 @@ export function LoginPage() {
       ) : null}
 
       <div className="rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-600">
-        <p>Demo user: user@shop.com / user123</p>
-        <p>Demo admin: admin@shop.com / admin123</p>
+        <p>{t("login.demoUser")}</p>
+        <p>{t("login.demoAdmin")}</p>
       </div>
 
       <button
@@ -86,7 +88,7 @@ export function LoginPage() {
         type="submit"
         disabled={loginMutation.isPending}
       >
-        {loginMutation.isPending ? "Signing in..." : "Sign in"}
+        {loginMutation.isPending ? t("login.submitting") : t("login.submit")}
       </button>
     </form>
   );

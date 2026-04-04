@@ -15,8 +15,10 @@ import {
 import { createOrder } from "@/features/checkout/api/create-order";
 import { EmptyState } from "@/shared/ui/empty-state";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export function CheckoutPage() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -52,32 +54,34 @@ export function CheckoutPage() {
       });
 
       dispatch(clearCart());
-      toast.success("Order placed successfully");
+      toast.success(t("checkout.orderPlaced"));
       navigate(`/order-success?orderId=${response.id}`);
     } catch {
-      toast.error("Failed to place order");
+      toast.error(t("checkout.placeOrderFailed"));
     }
   };
 
   if (!items.length) {
     return (
       <EmptyState
-        title="Your cart is empty"
-        description="Add products before proceeding to checkout."
+        title={t("checkout.emptyTitle")}
+        description={t("checkout.emptyDescription")}
       />
     );
   }
 
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold">Checkout</h1>
+      <h1 className="text-2xl font-bold">{t("checkout.title")}</h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid gap-4 rounded-lg border bg-white p-4"
       >
         <div>
-          <label className="mb-1 block text-sm font-medium">Full name</label>
+          <label className="mb-1 block text-sm font-medium">
+            {t("checkout.fullName")}
+          </label>
           <input
             className="w-full rounded border px-3 py-2"
             {...register("fullName")}
@@ -90,7 +94,9 @@ export function CheckoutPage() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium">Email</label>
+          <label className="mb-1 block text-sm font-medium">
+            {t("checkout.email")}
+          </label>
           <input
             className="w-full rounded border px-3 py-2"
             {...register("email")}
@@ -101,7 +107,9 @@ export function CheckoutPage() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium">Address</label>
+          <label className="mb-1 block text-sm font-medium">
+            {t("checkout.address")}
+          </label>
           <input
             className="w-full rounded border px-3 py-2"
             {...register("address")}
@@ -115,7 +123,9 @@ export function CheckoutPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="mb-1 block text-sm font-medium">City</label>
+            <label className="mb-1 block text-sm font-medium">
+              {t("checkout.city")}
+            </label>
             <input
               className="w-full rounded border px-3 py-2"
               {...register("city")}
@@ -129,7 +139,7 @@ export function CheckoutPage() {
 
           <div>
             <label className="mb-1 block text-sm font-medium">
-              Postal code
+              {t("checkout.postalCode")}
             </label>
             <input
               className="w-full rounded border px-3 py-2"
@@ -144,7 +154,7 @@ export function CheckoutPage() {
         </div>
 
         <div className="rounded bg-slate-50 p-3 text-sm text-slate-700">
-          Total: <span className="font-semibold">${totalPrice.toFixed(2)}</span>
+          {t("cart.total", { value: totalPrice.toFixed(2) })}
         </div>
 
         {mutation.isError ? (
@@ -158,7 +168,7 @@ export function CheckoutPage() {
           className="rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
           disabled={mutation.isPending}
         >
-          {mutation.isPending ? "Placing order..." : "Place order"}
+          {mutation.isPending ? t("checkout.placingOrder") : t("checkout.placeOrder")}
         </button>
       </form>
     </section>

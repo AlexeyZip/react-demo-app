@@ -11,8 +11,10 @@ import {
 } from "@/features/cart/model/selectors";
 import { EmptyState } from "@/shared/ui/empty-state";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function CartPage() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectCartItems);
   const itemsCount = useAppSelector(selectCartItemsCount);
@@ -21,8 +23,8 @@ export function CartPage() {
   if (!items.length) {
     return (
       <EmptyState
-        title="Your cart is empty"
-        description="Add products from the catalog to see them here."
+        title={t("cart.emptyTitle")}
+        description={t("cart.emptyDescription")}
       />
     );
   }
@@ -30,13 +32,13 @@ export function CartPage() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Cart</h1>
+        <h1 className="text-2xl font-bold">{t("cart.title")}</h1>
         <button
           type="button"
           className="rounded bg-rose-600 px-4 py-2 text-white"
           onClick={() => dispatch(clearCart())}
         >
-          Clear cart
+          {t("cart.clear")}
         </button>
       </div>
 
@@ -94,21 +96,25 @@ export function CartPage() {
               className="rounded bg-slate-900 px-3 py-1.5 text-white"
               onClick={() => dispatch(removeItem(item.productId))}
             >
-              Remove
+              {t("cart.remove")}
             </button>
           </article>
         ))}
       </div>
 
       <div className="rounded-lg border bg-white p-4">
-        <p className="text-sm text-slate-600">Items: {itemsCount}</p>
-        <p className="mt-1 text-lg font-bold">Total: ${totalPrice.toFixed(2)}</p>
+        <p className="text-sm text-slate-600">
+          {t("cart.items", { count: itemsCount })}
+        </p>
+        <p className="mt-1 text-lg font-bold">
+          {t("cart.total", { value: totalPrice.toFixed(2) })}
+        </p>
         <div className="mt-3">
           <Link
             to="/checkout"
             className="inline-block rounded bg-slate-900 px-4 py-2 text-white"
           >
-            Proceed to checkout
+            {t("cart.proceedToCheckout")}
           </Link>
         </div>
       </div>

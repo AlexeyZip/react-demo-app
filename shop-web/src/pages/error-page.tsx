@@ -1,10 +1,12 @@
 import { isRouteErrorResponse, useRouteError, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function ErrorPage() {
+  const { t } = useTranslation();
   const error = useRouteError();
 
-  let title = "Unexpected error";
-  let message = "Something went wrong. Please try again.";
+  let title = t("errorPage.unexpectedTitle");
+  let message = t("errorPage.unexpectedMessage");
 
   if (isRouteErrorResponse(error)) {
     title = `Error ${error.status}`;
@@ -19,7 +21,7 @@ export function ErrorPage() {
         to="/"
         className="inline-block rounded bg-slate-900 px-4 py-2 text-white"
       >
-        Back to home
+        {t("errorPage.backHome")}
       </Link>
     </section>
   );

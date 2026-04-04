@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "home": "Головна",
+    "login": "Логін",
+    "admin": "Адмінка",
+    "cart": "Кошик",
+    "orders": "Замовлення",
+    "adminOrders": "Адмін замовлення",
+    "logout": "Вийти",
+    "guest": "Гість"
+  },
+  "catalog": {
+    "title": "Каталог товарів",
+    "updating": "Оновлення...",
+    "loadError": "Не вдалося завантажити товари: {{message}}",
+    "emptyTitle": "Товарів не знайдено",
+    "emptyDescription": "Спробуйте змінити пошук, категорію або скинути фільтри."
+  },
+  "filters": {
+    "searchPlaceholder": "Пошук за назвою або описом...",
+    "allCategories": "Усі категорії",
+    "categoryAccessories": "Аксесуари",
+    "categoryDisplays": "Монітори",
+    "perPage": "{{count}} на сторінці",
+    "reset": "Скинути фільтри"
+  },
+  "pagination": {
+    "previous": "Попередня",
+    "next": "Наступна",
+    "pageOf": "Сторінка {{page}} з {{totalPages}}"
+  },
+  "product": {
+    "inStock": "В наявності",
+    "outOfStock": "Немає в наявності",
+    "addToCart": "Додати в кошик"
+  },
+  "cart": {
+    "title": "Кошик",
+    "clear": "Очистити кошик",
+    "emptyTitle": "Ваш кошик порожній",
+    "emptyDescription": "Додайте товари з каталогу, щоб побачити їх тут.",
+    "items": "Товарів: {{count}}",
+    "total": "Сума: ${{value}}",
+    "proceedToCheckout": "Перейти до оформлення",
+    "remove": "Видалити"
+  },
+  "checkout": {
+    "title": "Оформлення замовлення",
+    "fullName": "Повне ім'я",
+    "email": "Email",
+    "address": "Адреса",
+    "city": "Місто",
+    "postalCode": "Поштовий індекс",
+    "placingOrder": "Оформлюємо замовлення...",
+    "placeOrder": "Оформити замовлення",
+    "emptyTitle": "Ваш кошик порожній",
+    "emptyDescription": "Додайте товари перед оформленням замовлення.",
+    "orderPlaced": "Замовлення успішно оформлено",
+    "placeOrderFailed": "Не вдалося оформити замовлення"
+  },
+  "orders": {
+    "title": "Замовлення",
+    "loading": "Завантаження замовлень...",
+    "loadError": "Не вдалося завантажити замовлення: {{message}}",
+    "emptyTitle": "Поки що немає замовлень",
+    "emptyDescription": "Оформіть перше замовлення, щоб побачити його тут.",
+    "created": "Створено: {{value}}",
+    "items": "Товарів: {{count}}",
+    "total": "Сума: ${{value}}"
+  },
+  "adminProducts": {
+    "title": "Адмін товари",
+    "placeholderTitle": "Назва",
+    "placeholderDescription": "Опис",
+    "placeholderPrice": "Ціна",
+    "placeholderImageUrl": "URL зображення",
+    "placeholderCategory": "Категорія",
+    "inStock": "В наявності",
+    "create": "Створити товар",
+    "update": "Оновити товар",
+    "cancelEdit": "Скасувати редагування",
+    "loading": "Завантаження товарів...",
+    "loadError": "Не вдалося завантажити товари: {{message}}",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "createdToast": "Товар створено",
+    "updatedToast": "Товар оновлено",
+    "deletedToast": "Товар видалено",
+    "createFailedToast": "Не вдалося створити товар",
+    "updateFailedToast": "Не вдалося оновити товар",
+    "deleteFailedToast": "Не вдалося видалити товар"
+  },
+  "adminOrders": {
+    "title": "Адмін замовлення",
+    "loading": "Завантаження замовлень...",
+    "loadError": "Не вдалося завантажити замовлення: {{message}}",
+    "emptyTitle": "Поки що немає замовлень",
+    "emptyDescription": "Замовлення з'являться після оформлення користувачами.",
+    "created": "Створено: {{value}}",
+    "customer": "Клієнт: {{name}} ({{email}})",
+    "total": "Сума: ${{value}}",
+    "markAs": "Позначити як {{status}}",
+    "statusUpdatedToast": "Статус замовлення оновлено"
+  },
+  "orderSuccess": {
+    "title": "Замовлення успішно оформлено",
+    "description": "Ваше замовлення створено{{suffix}}.",
+    "backToCatalog": "Назад до каталогу",
+    "goToCart": "До кошика"
+  },
+  "login": {
+    "title": "Логін",
+    "email": "Email",
+    "password": "Пароль",
+    "submit": "Увійти",
+    "submitting": "Вхід...",
+    "demoUser": "Демо користувач: user@shop.com / user123",
+    "demoAdmin": "Демо адміністратор: admin@shop.com / admin123"
+  },
+  "errorPage": {
+    "unexpectedTitle": "Неочікувана помилка",
+    "unexpectedMessage": "Щось пішло не так. Спробуйте ще раз.",
+    "backHome": "На головну"
+  },
+  "status": {
+    "pending": "очікує",
+    "paid": "оплачено",
+    "shipped": "відправлено"
+  }
+}

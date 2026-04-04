@@ -7,8 +7,10 @@ import { useDebouncedValue } from "@/shared/lib/use-debounced-value";
 import { EmptyState } from "@/shared/ui/empty-state";
 import { useAppDispatch } from "@/app/store/hooks";
 import { addItem } from "@/features/cart/model/cart-slice";
+import { useTranslation } from "react-i18next";
 
 export function HomePage() {
+  const { t } = useTranslation();
   const { filters, setFilters, resetFilters } = useProductFilters();
   const debouncedQ = useDebouncedValue(filters.q, 400);
   const dispatch = useAppDispatch();
@@ -28,7 +30,7 @@ export function HomePage() {
 
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold">Product Catalog</h1>
+      <h1 className="text-2xl font-bold">{t("catalog.title")}</h1>
 
       <ProductsFilters
         filters={filters}
@@ -37,12 +39,12 @@ export function HomePage() {
       />
 
       {isFetching ? (
-        <p className="text-sm text-slate-500">Updating...</p>
+        <p className="text-sm text-slate-500">{t("catalog.updating")}</p>
       ) : null}
 
       {isError ? (
         <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
-          Failed to load products: {error.message}
+          {t("catalog.loadError", { message: error.message })}
         </p>
       ) : null}
 
@@ -56,8 +58,8 @@ export function HomePage() {
 
       {!isPending && !isError && (!data || data.items.length === 0) ? (
         <EmptyState
-          title="No products found"
-          description="Try changing your search, category, or reset the filters."
+          title={t("catalog.emptyTitle")}
+          description={t("catalog.emptyDescription")}
         />
       ) : null}
 

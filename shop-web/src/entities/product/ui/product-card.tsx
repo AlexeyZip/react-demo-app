@@ -1,4 +1,5 @@
 import type { Product } from "@/entities/product/model/types";
+import { useTranslation } from "react-i18next";
 
 interface ProductCardProps {
   product: Product;
@@ -6,6 +7,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onAddToCart }: ProductCardProps) {
+  const { t } = useTranslation();
+
   return (
     <article className="rounded-lg border bg-white p-4 shadow-sm">
       <img
@@ -23,7 +26,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
               product.inStock ? "text-emerald-600" : "text-rose-600"
             }`}
           >
-            {product.inStock ? "In stock" : "Out of stock"}
+            {product.inStock ? t("product.inStock") : t("product.outOfStock")}
           </span>
         </div>
 
@@ -33,7 +36,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
           disabled={!product.inStock}
           onClick={() => onAddToCart(product)}
         >
-          Add to cart
+          {t("product.addToCart")}
         </button>
       </div>
     </article>

@@ -1,4 +1,5 @@
 import type { OrderStatus } from "@/entities/order";
+import { useTranslation } from "react-i18next";
 
 interface OrderStatusBadgeProps {
   status: OrderStatus;
@@ -11,11 +12,13 @@ const statusStyles: Record<OrderStatus, string> = {
 };
 
 export function OrderStatusBadge({ status }: OrderStatusBadgeProps) {
+  const { t } = useTranslation();
+
   return (
     <span
       className={`rounded px-2 py-1 text-xs font-medium ${statusStyles[status]}`}
     >
-      {status}
+      {t(`status.${status}`)}
     </span>
   );
 }
