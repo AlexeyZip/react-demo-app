@@ -19,4 +19,12 @@ void i18n
     interpolation: { escapeValue: false },
   });
 
+i18n.on("languageChanged", (lng) => {
+  document.documentElement.lang = lng.startsWith("uk") ? "uk" : "en";
+});
+
+document.documentElement.lang = i18n.resolvedLanguage?.startsWith("uk")
+  ? "uk"
+  : "en";
+
 export default i18n;

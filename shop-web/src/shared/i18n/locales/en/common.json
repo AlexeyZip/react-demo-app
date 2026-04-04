@@ -122,6 +122,18 @@
     "unexpectedMessage": "Something went wrong. Please try again.",
     "backHome": "Back to home"
   },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "mainNavigation": "Main navigation",
+    "productSearch": "Search products",
+    "productCategory": "Filter products by category",
+    "productsPerPage": "Products per page",
+    "paginationPrevious": "Go to previous page",
+    "paginationNext": "Go to next page",
+    "decreaseQuantity": "Decrease quantity for {{title}}",
+    "increaseQuantity": "Increase quantity for {{title}}",
+    "removeFromCart": "Remove {{title}} from cart"
+  },
   "status": {
     "pending": "pending",
     "paid": "paid",

@@ -19,8 +19,17 @@ export function AppLayout() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-slate-900 focus:px-3 focus:py-2 focus:text-white"
+      >
+        {t("a11y.skipToContent")}
+      </a>
       <header className="border-b bg-white dark:border-slate-800 dark:bg-slate-900">
-        <nav className="mx-auto flex max-w-5xl items-center gap-4 p-4">
+        <nav
+          aria-label={t("a11y.mainNavigation")}
+          className="mx-auto flex max-w-5xl items-center gap-4 p-4"
+        >
           <Link to="/">{t("nav.home")}</Link>
           <Link to="/login">{t("nav.login")}</Link>
           {user?.role === "admin" ? (
@@ -63,7 +72,7 @@ export function AppLayout() {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-5xl p-6">
+      <main id="main-content" className="mx-auto max-w-5xl p-6">
         <Outlet />
       </main>
     </div>

@@ -122,6 +122,18 @@
     "unexpectedMessage": "Щось пішло не так. Спробуйте ще раз.",
     "backHome": "На головну"
   },
+  "a11y": {
+    "skipToContent": "Перейти до основного вмісту",
+    "mainNavigation": "Основна навігація",
+    "productSearch": "Пошук товарів",
+    "productCategory": "Фільтр товарів за категорією",
+    "productsPerPage": "Кількість товарів на сторінці",
+    "paginationPrevious": "Перейти на попередню сторінку",
+    "paginationNext": "Перейти на наступну сторінку",
+    "decreaseQuantity": "Зменшити кількість для {{title}}",
+    "increaseQuantity": "Збільшити кількість для {{title}}",
+    "removeFromCart": "Видалити {{title}} з кошика"
+  },
   "status": {
     "pending": "очікує",
     "paid": "оплачено",

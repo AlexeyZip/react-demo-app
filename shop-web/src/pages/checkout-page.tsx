@@ -79,43 +79,54 @@ export function CheckoutPage() {
         className="grid gap-4 rounded-lg border bg-white p-4 dark:border-slate-800 dark:bg-slate-900"
       >
         <div>
-          <label className="mb-1 block text-sm font-medium">
+          <label htmlFor="checkout-full-name" className="mb-1 block text-sm font-medium">
             {t("checkout.fullName")}
           </label>
           <input
+            id="checkout-full-name"
             className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            aria-invalid={Boolean(errors.fullName)}
+            aria-describedby={errors.fullName ? "checkout-full-name-error" : undefined}
             {...register("fullName")}
           />
           {errors.fullName ? (
-            <p className="mt-1 text-sm text-rose-600">
+            <p id="checkout-full-name-error" className="mt-1 text-sm text-rose-600">
               {errors.fullName.message}
             </p>
           ) : null}
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium">
+          <label htmlFor="checkout-email" className="mb-1 block text-sm font-medium">
             {t("checkout.email")}
           </label>
           <input
+            id="checkout-email"
             className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "checkout-email-error" : undefined}
             {...register("email")}
           />
           {errors.email ? (
-            <p className="mt-1 text-sm text-rose-600">{errors.email.message}</p>
+            <p id="checkout-email-error" className="mt-1 text-sm text-rose-600">
+              {errors.email.message}
+            </p>
           ) : null}
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium">
+          <label htmlFor="checkout-address" className="mb-1 block text-sm font-medium">
             {t("checkout.address")}
           </label>
           <input
+            id="checkout-address"
             className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            aria-invalid={Boolean(errors.address)}
+            aria-describedby={errors.address ? "checkout-address-error" : undefined}
             {...register("address")}
           />
           {errors.address ? (
-            <p className="mt-1 text-sm text-rose-600">
+            <p id="checkout-address-error" className="mt-1 text-sm text-rose-600">
               {errors.address.message}
             </p>
           ) : null}
@@ -123,30 +134,36 @@ export function CheckoutPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="mb-1 block text-sm font-medium">
+            <label htmlFor="checkout-city" className="mb-1 block text-sm font-medium">
               {t("checkout.city")}
             </label>
             <input
+              id="checkout-city"
               className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+              aria-invalid={Boolean(errors.city)}
+              aria-describedby={errors.city ? "checkout-city-error" : undefined}
               {...register("city")}
             />
             {errors.city ? (
-              <p className="mt-1 text-sm text-rose-600">
+              <p id="checkout-city-error" className="mt-1 text-sm text-rose-600">
                 {errors.city.message}
               </p>
             ) : null}
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium">
+            <label htmlFor="checkout-postal-code" className="mb-1 block text-sm font-medium">
               {t("checkout.postalCode")}
             </label>
             <input
+              id="checkout-postal-code"
               className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+              aria-invalid={Boolean(errors.postalCode)}
+              aria-describedby={errors.postalCode ? "checkout-postal-code-error" : undefined}
               {...register("postalCode")}
             />
             {errors.postalCode ? (
-              <p className="mt-1 text-sm text-rose-600">
+              <p id="checkout-postal-code-error" className="mt-1 text-sm text-rose-600">
                 {errors.postalCode.message}
               </p>
             ) : null}
@@ -158,7 +175,10 @@ export function CheckoutPage() {
         </div>
 
         {mutation.isError ? (
-          <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300">
+          <p
+            role="alert"
+            className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300"
+          >
             {mutation.error.message}
           </p>
         ) : null}

@@ -8,12 +8,19 @@ export function OrdersPage() {
   const { data, isPending, isError, error } = useOrdersQuery();
 
   if (isPending) {
-    return <p className="text-slate-600 dark:text-slate-300">{t("orders.loading")}</p>;
+    return (
+      <p role="status" aria-live="polite" className="text-slate-600 dark:text-slate-300">
+        {t("orders.loading")}
+      </p>
+    );
   }
 
   if (isError) {
     return (
-      <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300">
+      <p
+        role="alert"
+        className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300"
+      >
         {t("orders.loadError", { message: error.message })}
       </p>
     );

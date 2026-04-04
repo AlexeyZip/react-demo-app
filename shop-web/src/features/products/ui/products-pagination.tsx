@@ -20,6 +20,7 @@ export function ProductsPagination({
         className="rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
         onClick={() => onPageChange(page - 1)}
         disabled={page <= 1}
+        aria-label={t("a11y.paginationPrevious")}
       >
         {t("pagination.previous")}
       </button>
@@ -33,6 +34,7 @@ export function ProductsPagination({
         className="rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
         onClick={() => onPageChange(page + 1)}
         disabled={page >= totalPages}
+        aria-label={t("a11y.paginationNext")}
       >
         {t("pagination.next")}
       </button>

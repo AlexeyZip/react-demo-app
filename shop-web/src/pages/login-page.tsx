@@ -47,33 +47,50 @@ export function LoginPage() {
       <h1 className="text-2xl font-bold">{t("login.title")}</h1>
 
       <div>
-        <label className="mb-1 block text-sm font-medium">{t("login.email")}</label>
+        <label htmlFor="login-email" className="mb-1 block text-sm font-medium">
+          {t("login.email")}
+        </label>
         <input
+          id="login-email"
           className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           type="email"
           placeholder="you@example.com"
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "login-email-error" : undefined}
           {...register("email")}
         />
         {errors.email ? (
-          <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+          <p id="login-email-error" className="mt-1 text-sm text-red-600">
+            {errors.email.message}
+          </p>
         ) : null}
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium">{t("login.password")}</label>
+        <label htmlFor="login-password" className="mb-1 block text-sm font-medium">
+          {t("login.password")}
+        </label>
         <input
+          id="login-password"
           className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           type="password"
           placeholder="******"
+          aria-invalid={Boolean(errors.password)}
+          aria-describedby={errors.password ? "login-password-error" : undefined}
           {...register("password")}
         />
         {errors.password ? (
-          <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+          <p id="login-password-error" className="mt-1 text-sm text-red-600">
+            {errors.password.message}
+          </p>
         ) : null}
       </div>
 
       {loginMutation.isError ? (
-        <p className="rounded border border-red-200 bg-red-50 p-2 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
+        <p
+          role="alert"
+          className="rounded border border-red-200 bg-red-50 p-2 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300"
+        >
           {loginMutation.error.message}
         </p>
       ) : null}

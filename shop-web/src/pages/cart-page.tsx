@@ -63,6 +63,7 @@ export function CartPage() {
               <button
                 type="button"
                 className="rounded border px-3 py-1 dark:border-slate-700"
+                aria-label={t("a11y.decreaseQuantity", { title: item.title })}
                 onClick={() =>
                   dispatch(
                     setQuantity({
@@ -78,6 +79,7 @@ export function CartPage() {
               <button
                 type="button"
                 className="rounded border px-3 py-1 dark:border-slate-700"
+                aria-label={t("a11y.increaseQuantity", { title: item.title })}
                 onClick={() =>
                   dispatch(
                     setQuantity({
@@ -94,6 +96,7 @@ export function CartPage() {
             <button
               type="button"
               className="rounded bg-slate-900 px-3 py-1.5 text-white"
+              aria-label={t("a11y.removeFromCart", { title: item.title })}
               onClick={() => dispatch(removeItem(item.productId))}
             >
               {t("cart.remove")}

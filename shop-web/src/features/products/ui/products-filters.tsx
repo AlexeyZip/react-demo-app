@@ -17,14 +17,22 @@ export function ProductsFilters({
   return (
     <section className="rounded-lg border bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="grid gap-3 sm:grid-cols-4">
+        <label className="sr-only" htmlFor="products-search">
+          {t("a11y.productSearch")}
+        </label>
         <input
+          id="products-search"
           className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           placeholder={t("filters.searchPlaceholder")}
           value={filters.q}
           onChange={(e) => onChange({ q: e.target.value })}
         />
 
+        <label className="sr-only" htmlFor="products-category">
+          {t("a11y.productCategory")}
+        </label>
         <select
+          id="products-category"
           className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           value={filters.category}
           onChange={(e) => onChange({ category: e.target.value })}
@@ -34,7 +42,11 @@ export function ProductsFilters({
           <option value="Displays">{t("filters.categoryDisplays")}</option>
         </select>
 
+        <label className="sr-only" htmlFor="products-limit">
+          {t("a11y.productsPerPage")}
+        </label>
         <select
+          id="products-limit"
           className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           value={filters.limit}
           onChange={(e) => onChange({ limit: Number(e.target.value), page: 1 })}
