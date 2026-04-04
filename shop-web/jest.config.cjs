@@ -5,6 +5,7 @@ module.exports = {
   roots: ["<rootDir>/tests"],
   moduleFileExtensions: ["ts", "tsx", "js"],
   setupFilesAfterEnv: ["<rootDir>/tests/jest.setup.ts"],
+  clearMocks: true,
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
@@ -19,4 +20,12 @@ module.exports = {
     "!src/main.tsx",
     "!src/**/*.d.ts",
   ],
+  coverageThreshold: {
+    global: {
+      branches: 65,
+      functions: 90,
+      lines: 90,
+      statements: 90,
+    },
+  },
 };

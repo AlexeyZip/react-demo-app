@@ -3,6 +3,7 @@ import {
   selectCartItemsCount,
   selectCartTotalPrice,
 } from "@/features/cart/model/selectors";
+import type { RootState } from "@/app/store/store";
 
 describe("cart selectors", () => {
   const mockState = {
@@ -24,7 +25,7 @@ describe("cart selectors", () => {
         },
       ],
     },
-  } as any;
+  } as RootState;
 
   it("selects cart items", () => {
     expect(selectCartItems(mockState)).toHaveLength(2);

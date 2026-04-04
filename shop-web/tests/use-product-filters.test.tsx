@@ -54,4 +54,13 @@ describe("useProductFilters", () => {
       limit: 24,
     });
   });
+
+  it("falls back to safe defaults for invalid page and limit", () => {
+    const { result } = renderHook(() => useProductFilters(), {
+      wrapper: wrapperWithRoute("/?page=-10&limit=0"),
+    });
+
+    expect(result.current.filters.page).toBe(1);
+    expect(result.current.filters.limit).toBe(6);
+  });
 });
