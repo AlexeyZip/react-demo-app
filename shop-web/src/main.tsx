@@ -8,6 +8,7 @@ import { store } from "@/app/store/store";
 import { router } from "@/app/router/router";
 import "./index.css";
 import "@/shared/i18n/config";
+import { applyTheme, getStoredTheme } from "@/shared/theme/theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,8 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+applyTheme(getStoredTheme());
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

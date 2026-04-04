@@ -41,7 +41,7 @@ export function LoginPage() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-md space-y-4 rounded bg-white p-6 shadow"
+      className="max-w-md space-y-4 rounded bg-white p-6 shadow dark:border dark:border-slate-800 dark:bg-slate-900"
       noValidate
     >
       <h1 className="text-2xl font-bold">{t("login.title")}</h1>
@@ -49,7 +49,7 @@ export function LoginPage() {
       <div>
         <label className="mb-1 block text-sm font-medium">{t("login.email")}</label>
         <input
-          className="w-full rounded border px-3 py-2"
+          className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           type="email"
           placeholder="you@example.com"
           {...register("email")}
@@ -62,7 +62,7 @@ export function LoginPage() {
       <div>
         <label className="mb-1 block text-sm font-medium">{t("login.password")}</label>
         <input
-          className="w-full rounded border px-3 py-2"
+          className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           type="password"
           placeholder="******"
           {...register("password")}
@@ -73,12 +73,12 @@ export function LoginPage() {
       </div>
 
       {loginMutation.isError ? (
-        <p className="rounded border border-red-200 bg-red-50 p-2 text-sm text-red-700">
+        <p className="rounded border border-red-200 bg-red-50 p-2 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
           {loginMutation.error.message}
         </p>
       ) : null}
 
-      <div className="rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-600">
+      <div className="rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300">
         <p>{t("login.demoUser")}</p>
         <p>{t("login.demoAdmin")}</p>
       </div>

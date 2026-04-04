@@ -8,12 +8,12 @@ export function OrdersPage() {
   const { data, isPending, isError, error } = useOrdersQuery();
 
   if (isPending) {
-    return <p className="text-slate-600">{t("orders.loading")}</p>;
+    return <p className="text-slate-600 dark:text-slate-300">{t("orders.loading")}</p>;
   }
 
   if (isError) {
     return (
-      <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
+      <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300">
         {t("orders.loadError", { message: error.message })}
       </p>
     );
@@ -34,19 +34,19 @@ export function OrdersPage() {
 
       <div className="space-y-3">
         {data.map((order) => (
-          <article key={order.id} className="rounded-lg border bg-white p-4">
+          <article key={order.id} className="rounded-lg border bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="font-semibold">{order.id}</p>
               <OrderStatusBadge status={order.status} />
             </div>
 
-            <p className="mt-2 text-sm text-slate-600">
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
               {t("orders.created", {
                 value: new Date(order.createdAt).toLocaleString(),
               })}
             </p>
 
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
               {t("orders.items", {
                 count: order.items.reduce((sum, item) => sum + item.quantity, 0),
               })}

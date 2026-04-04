@@ -76,14 +76,14 @@ export function CheckoutPage() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid gap-4 rounded-lg border bg-white p-4"
+        className="grid gap-4 rounded-lg border bg-white p-4 dark:border-slate-800 dark:bg-slate-900"
       >
         <div>
           <label className="mb-1 block text-sm font-medium">
             {t("checkout.fullName")}
           </label>
           <input
-            className="w-full rounded border px-3 py-2"
+            className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
             {...register("fullName")}
           />
           {errors.fullName ? (
@@ -98,7 +98,7 @@ export function CheckoutPage() {
             {t("checkout.email")}
           </label>
           <input
-            className="w-full rounded border px-3 py-2"
+            className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
             {...register("email")}
           />
           {errors.email ? (
@@ -111,7 +111,7 @@ export function CheckoutPage() {
             {t("checkout.address")}
           </label>
           <input
-            className="w-full rounded border px-3 py-2"
+            className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
             {...register("address")}
           />
           {errors.address ? (
@@ -127,7 +127,7 @@ export function CheckoutPage() {
               {t("checkout.city")}
             </label>
             <input
-              className="w-full rounded border px-3 py-2"
+              className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
               {...register("city")}
             />
             {errors.city ? (
@@ -142,7 +142,7 @@ export function CheckoutPage() {
               {t("checkout.postalCode")}
             </label>
             <input
-              className="w-full rounded border px-3 py-2"
+              className="w-full rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
               {...register("postalCode")}
             />
             {errors.postalCode ? (
@@ -153,12 +153,12 @@ export function CheckoutPage() {
           </div>
         </div>
 
-        <div className="rounded bg-slate-50 p-3 text-sm text-slate-700">
+        <div className="rounded bg-slate-50 p-3 text-sm text-slate-700 dark:bg-slate-950 dark:text-slate-300">
           {t("cart.total", { value: totalPrice.toFixed(2) })}
         </div>
 
         {mutation.isError ? (
-          <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
+          <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300">
             {mutation.error.message}
           </p>
         ) : null}

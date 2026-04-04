@@ -10,7 +10,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const { t } = useTranslation();
 
   return (
-    <article className="rounded-lg border bg-white p-4 shadow-sm">
+    <article className="rounded-lg border bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <img
         src={product.imageUrl}
         alt={product.title}
@@ -18,7 +18,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
       />
       <div className="space-y-2">
         <h3 className="text-lg font-semibold">{product.title}</h3>
-        <p className="text-sm text-slate-600">{product.description}</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300">{product.description}</p>
         <div className="flex items-center justify-between">
           <span className="font-bold">${product.price.toFixed(2)}</span>
           <span

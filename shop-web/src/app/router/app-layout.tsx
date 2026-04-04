@@ -8,6 +8,7 @@ import { logout } from "@/features/auth/model/auth-slice";
 import { selectCartItemsCount } from "@/features/cart/model/selectors";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/shared/ui/language-switcher";
+import { ThemeSwitcher } from "@/shared/ui/theme-switcher";
 
 export function AppLayout() {
   const dispatch = useAppDispatch();
@@ -17,12 +18,14 @@ export function AppLayout() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b bg-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <header className="border-b bg-white dark:border-slate-800 dark:bg-slate-900">
         <nav className="mx-auto flex max-w-5xl items-center gap-4 p-4">
           <Link to="/">{t("nav.home")}</Link>
           <Link to="/login">{t("nav.login")}</Link>
-          {user?.role === "admin" ? <Link to="/admin">{t("nav.admin")}</Link> : null}
+          {user?.role === "admin" ? (
+            <Link to="/admin">{t("nav.admin")}</Link>
+          ) : null}
           <Link to="/cart" className="relative">
             {t("nav.cart")}
             {cartItemsCount > 0 ? (
@@ -37,10 +40,11 @@ export function AppLayout() {
           ) : null}
 
           <div className="ml-auto flex items-center gap-3">
+            <ThemeSwitcher />
             <LanguageSwitcher />
             {isAuthenticated && user ? (
               <>
-                <span className="text-sm text-slate-600">
+                <span className="text-sm text-slate-600 dark:text-slate-300">
                   {user.email} ({user.role})
                 </span>
                 <button
@@ -51,7 +55,9 @@ export function AppLayout() {
                 </button>
               </>
             ) : (
-              <span className="text-sm text-slate-500">{t("nav.guest")}</span>
+              <span className="text-sm text-slate-500 dark:text-slate-400">
+                {t("nav.guest")}
+              </span>
             )}
           </div>
         </nav>

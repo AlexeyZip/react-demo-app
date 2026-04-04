@@ -46,7 +46,7 @@ export function CartPage() {
         {items.map((item) => (
           <article
             key={item.productId}
-            className="flex items-center gap-4 rounded-lg border bg-white p-4"
+            className="flex items-center gap-4 rounded-lg border bg-white p-4 dark:border-slate-800 dark:bg-slate-900"
           >
             <img
               src={item.imageUrl}
@@ -56,13 +56,13 @@ export function CartPage() {
 
             <div className="min-w-0 flex-1">
               <h2 className="truncate font-semibold">{item.title}</h2>
-              <p className="text-sm text-slate-600">${item.price.toFixed(2)}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">${item.price.toFixed(2)}</p>
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="rounded border px-3 py-1"
+                className="rounded border px-3 py-1 dark:border-slate-700"
                 onClick={() =>
                   dispatch(
                     setQuantity({
@@ -77,7 +77,7 @@ export function CartPage() {
               <span className="min-w-6 text-center">{item.quantity}</span>
               <button
                 type="button"
-                className="rounded border px-3 py-1"
+                className="rounded border px-3 py-1 dark:border-slate-700"
                 onClick={() =>
                   dispatch(
                     setQuantity({
@@ -102,8 +102,8 @@ export function CartPage() {
         ))}
       </div>
 
-      <div className="rounded-lg border bg-white p-4">
-        <p className="text-sm text-slate-600">
+      <div className="rounded-lg border bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+        <p className="text-sm text-slate-600 dark:text-slate-300">
           {t("cart.items", { count: itemsCount })}
         </p>
         <p className="mt-1 text-lg font-bold">

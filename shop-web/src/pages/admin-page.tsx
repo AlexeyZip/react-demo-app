@@ -122,10 +122,10 @@ export function AdminPage() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid gap-3 rounded-lg border bg-white p-4"
+        className="grid gap-3 rounded-lg border bg-white p-4 dark:border-slate-800 dark:bg-slate-900"
       >
         <input
-          className="rounded border px-3 py-2"
+          className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           placeholder={t("adminProducts.placeholderTitle")}
           {...register("title")}
         />
@@ -134,7 +134,7 @@ export function AdminPage() {
         ) : null}
 
         <textarea
-          className="rounded border px-3 py-2"
+          className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           placeholder={t("adminProducts.placeholderDescription")}
           {...register("description")}
         />
@@ -143,7 +143,7 @@ export function AdminPage() {
         ) : null}
 
         <input
-          className="rounded border px-3 py-2"
+          className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           type="number"
           step="0.01"
           placeholder={t("adminProducts.placeholderPrice")}
@@ -154,7 +154,7 @@ export function AdminPage() {
         ) : null}
 
         <input
-          className="rounded border px-3 py-2"
+          className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           placeholder={t("adminProducts.placeholderImageUrl")}
           {...register("imageUrl")}
         />
@@ -163,7 +163,7 @@ export function AdminPage() {
         ) : null}
 
         <input
-          className="rounded border px-3 py-2"
+          className="rounded border px-3 py-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
           placeholder={t("adminProducts.placeholderCategory")}
           {...register("category")}
         />
@@ -199,7 +199,7 @@ export function AdminPage() {
 
       {isPending ? <p>{t("adminProducts.loading")}</p> : null}
       {isError ? (
-        <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700">
+        <p className="rounded border border-rose-200 bg-rose-50 p-3 text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-300">
           {t("adminProducts.loadError", { message: error.message })}
         </p>
       ) : null}
@@ -209,11 +209,11 @@ export function AdminPage() {
           {data?.items.map((product) => (
             <article
               key={product.id}
-              className="flex items-center justify-between rounded border bg-white p-3"
+              className="flex items-center justify-between rounded border bg-white p-3 dark:border-slate-800 dark:bg-slate-900"
             >
               <div>
                 <p className="font-semibold">{product.title}</p>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-slate-600 dark:text-slate-300">
                   ${product.price.toFixed(2)} - {product.category}
                 </p>
               </div>
@@ -221,7 +221,7 @@ export function AdminPage() {
               <div className="flex gap-2">
                 <button
                   type="button"
-                  className="rounded border px-3 py-1.5"
+                  className="rounded border px-3 py-1.5 dark:border-slate-700"
                   onClick={() => startEditing(product)}
                 >
                   {t("adminProducts.edit")}
