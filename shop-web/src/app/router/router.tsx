@@ -3,19 +3,19 @@ import { AppLayout } from "./app-layout";
 import { HomePage } from "@/pages/home-page";
 import { LoginPage } from "@/pages/login-page";
 import { AdminPage } from "@/pages/admin-page";
-import { NotFoundPage } from "@/pages/not-found-page";
 import { ProtectedRoute } from "./protected-route";
 import { CartPage } from "@/pages/cart-page";
 import { CheckoutPage } from "@/pages/checkout-page";
 import { OrderSuccessPage } from "@/pages/order-success-page";
 import { OrdersPage } from "@/pages/orders-page";
 import { AdminOrdersPage } from "@/pages/admin-orders-page";
+import { ErrorPage } from "@/pages/error-page";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    errorElement: <NotFoundPage />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },

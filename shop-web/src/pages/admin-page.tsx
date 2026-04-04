@@ -14,6 +14,7 @@ import {
   type ProductFormValues,
 } from "@/features/admin-products/model/product-form-schema";
 import type { Product } from "@/entities/product";
+import { toast } from "sonner";
 
 const defaultValues: ProductFormValues = {
   title: "",
@@ -50,6 +51,10 @@ export function AdminPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       reset(defaultValues);
+      toast.success("Product created");
+    },
+    onError: () => {
+      toast.error("Failed to create product");
     },
   });
 
@@ -65,6 +70,10 @@ export function AdminPage() {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       setEditingProduct(null);
       reset(defaultValues);
+      toast.success("Product updated");
+    },
+    onError: () => {
+      toast.error("Failed to update product");
     },
   });
 
@@ -72,6 +81,10 @@ export function AdminPage() {
     mutationFn: deleteProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
+      toast.success("Product deleted");
+    },
+    onError: () => {
+      toast.error("Failed to delete product");
     },
   });
 

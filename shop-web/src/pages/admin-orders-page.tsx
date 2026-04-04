@@ -4,6 +4,7 @@ import { updateOrderStatus } from "@/features/admin-orders/api/update-order-stat
 import { OrderStatusBadge } from "@/features/orders/ui/order-status-badge";
 import { EmptyState } from "@/shared/ui/empty-state";
 import type { OrderStatus } from "@/entities/order";
+import { toast } from "sonner";
 
 const statuses: OrderStatus[] = ["pending", "paid", "shipped"];
 
@@ -21,6 +22,7 @@ export function AdminOrdersPage() {
     }) => updateOrderStatus(orderId, status),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+      toast.success("Order status updated");
     },
   });
 
